@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content %} {% block title %} User Info {% endblock %}
+<div class="container-fluid">
+	<div class="card text-white bg-info mb-5" style="width: 80%">
+		<div class="card-body">
+			<h2 class="card-title">{{ u.username }}'s Info</h2>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">First Name: {{ u.first_name }}</li>
+				<li class="list-group-item">Last Name: {{ u.last_name }}</li>
+				<li class="list-group-item">Email: {{ u.email }}</li>
+				<li class="list-group-item">
+					<a href="/users/{{ u.username }}/feedback/add" class="btn btn-sm btn-success">Submit Feedback</a>
+					<a href="/users/{{ u.username }}/delete" class="btn btn-sm btn-danger">Delete</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="card text-white bg-secondary" style="width: 80%">
+		<div class="card-header">Feedback Submissions</div>
+		{% for issue in f %}
+		<div class="card-body">
+			<h3 class="card-title">{{ issue.title }}</h3>
+			<p class="card-text">{{ issue.content }}</p>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+					<a href="/feedback/{{issue.id}}/update" class="btn btn-sm btn-success">Update</a>
+					<a href="/feedback/{{issue.id}}/delete" class="btn btn-sm btn-danger">Delete</a>
+				</li>
+			</ul>
+		</div>
+		<hr />
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock %}
